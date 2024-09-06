@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Details - Voyage Planner</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('./images/trip.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #F7F9FB; /* Light header background color */
+            color: #2C3E50;
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .header img {
+            height: 40px;
+            margin-right: 15px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .trip-details-container {
+            background: #FFF;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .trip-details-container h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #2C3E50;
+        }
+
+        .trip-details-container p {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #7F8C8D;
+        }
+
+        .trip-details-container p span {
+            font-weight: bold;
+            color: #2980B9;
+        }
+
+        .btn-container {
+            margin-top: 20px;
+        }
+
+        .btn {
+            background-color: #2980B9;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #21618C;
+        }
+
+        .itinerary {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .itinerary h3 {
+            font-size: 22px;
+            color: #2C3E50;
+            margin-bottom: 10px;
+        }
+
+        .itinerary ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .itinerary ul li {
+            background-color: #ECF0F1;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
+            color: #34495E;
+            cursor: pointer;
+        }
+
+        .itinerary ul li .sub-list {
+            display: none;
+            margin-top: 10px;
+            margin-left: 20px;
+            list-style-type: disc;
+        }
+
+        .itinerary ul li.expanded .sub-list {
+            display: block;
+        }
+
+        .arrow {
+            font-size: 18px;
+            float: right;
+            transition: transform 0.3s ease;
+        }
+
+        .arrow.up {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <!-- Logo -->
+        <img src="/images/logo.png" alt="Logo">
+        <h1>Customized Trip Details</h1>
+    </header>
+
+    <div class="trip-details-container">
+        <h2>Destination: <span><%= trip.destination %></span></h2>
+        <p>Number of Days: <span><%= trip.days %></span></p>
+        <p>Budget: <span><%= trip.budget %></span></p>
+        <p>Traveling With: <span><%= trip.companions %></span></p>
+
+        <!-- Dynamic Itinerary -->
+        <div class="itinerary">
+            <h3>Suggested Itinerary</h3>
+            <ul>
+                <li onclick="toggleSubList(this)">
+                    Day 1: Arrival
+                    <span class="arrow">&#9654;</span>
+                    <ul class="sub-list">
+                        <li>Arrive at the destination in the morning.</li>
+                        <li>Check into your hotel.</li>
+                        <li>Explore the city center and main attractions.</li>
+                    </ul>
+                </li>
+                <!-- Iterate dynamically over days excluding the first and last day -->
+                <% for (var i = 2; i < trip.days; i++) { %>
+                <li onclick="toggleSubList(this)">
+                    Day <%= i %>: Explore more
+                    <span class="arrow">&#9654;</span>
+                    <ul class="sub-list">
+                        <li>Details for day <%= i %></li>
+                    </ul>
+                </li>
+                <% } %>
+                <li onclick="toggleSubList(this)">
+                    Day <%= trip.days %>: Departure
+                    <span class="arrow">&#9654;</span>
+                    <ul class="sub-list">
+                        <li>Check out from the hotel.</li>
+                        <li>Depart from the destination.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="btn-container">
+            <button class="btn" onclick="window.print()">Print Details</button>
+            <button class="btn" onclick="window.location.href='/login'">Go Back</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleSubList(element) {
+            const subList = element.querySelector('.sub-list');
+            const arrow = element.querySelector('.arrow');
+            if (subList.style.display === 'block') {
+                subList.style.display = 'none';
+                arrow.classList.remove('up');
+            } else {
+                subList.style.display = 'block';
+                arrow.classList.add('up');
+            }
+        }
+    </script>
+</body>
+
+</html>

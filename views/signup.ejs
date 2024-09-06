@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup - Voyage Planner</title>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="/css/signup.css">
+</head>
+<style>
+    body {
+        background: url('/images/back3.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
+    </style>
+<body>
+    <div class="container">
+        <!-- Logo and Header -->
+        <div class="logo">
+            <img src="/images/logo.png" alt="Voyage Planner Logo">
+        </div>
+
+        <h2>Create a new account</h2>
+
+        <!-- Display flash messages for errors or success -->
+        <% if (success_msg) { %>
+            <div class="alert alert-success"><%= success_msg %></div>
+        <% } %>
+        <% if (error_msg) { %>
+            <div class="error-msg"><%= error_msg %></div>
+        <% } %>
+
+        <!-- Signup Form -->
+        <form action="/signup" method="post">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <!-- Login Option -->
+        <div class="login-box">
+            <p>Already have an account?</p>
+            <button class="login-button" onclick="window.location.href='/login'">Login</button>
+        </div>
+    </div>
+</body>
+</html>

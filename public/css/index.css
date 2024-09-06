@@ -1,0 +1,98 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.container {
+    text-align: center;
+    height: 555px;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container h1, .container p {
+    font-weight: 500; /* Slightly less bold text */
+}
+
+.container h1 {
+    font-size: 1.8em; /* Slightly smaller font size */
+    margin-bottom: 20px;
+    font-style: italic; /* Cursive style */
+}
+
+.container p {
+    font-size: 1.1em; /* Slightly smaller font size */
+    margin-bottom: 20px;
+}
+
+/* Styles for the header and logo */
+header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start; /* Aligns the logo to the extreme left */
+    align-items: center;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-bottom: 1px solid #ddd;
+    position: relative; /* Allow positioning child elements relative to the header */
+}
+
+header img {
+    height: 120px; /* Adjust the size of your logo */
+    margin-left: 20px; /* Add some margin to the left */
+}
+
+header h1 {
+    font-style: italic; /* Cursive style */
+    font-size: 2.5em; /* Slightly smaller font size */
+    font-weight: bold; /* Bold text */
+    margin: 0;
+    position: absolute; /* Absolute positioning */
+    left: 50%; /* Center align the text relative to the position */
+    transform: translateX(-50%); /* Center align the text relative to its position */
+    color: #333; /* Optional: Change text color if needed */
+}
+
+/* Styles for the screenshot */
+.screenshot {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.screenshot img {
+    width: 100%; /* Ensure image scales with container width */
+    height: 350px; /* Maintain aspect ratio */
+    /* max-height: 250px; Set a maximum height to prevent scrolling */
+    object-fit: cover; /* Ensures image covers the area without distortion */
+}
+
+/* Button styles */
+.bbutton {
+    color: white;
+    background: linear-gradient(to right, #00bcd4, #2196f3);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.bbutton:hover {
+    background: linear-gradient(to bottom left, #00bcd4, #2196f3);
+}

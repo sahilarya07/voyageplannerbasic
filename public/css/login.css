@@ -1,0 +1,96 @@
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to bottom right, #e94057, #4a00e0); /* Gradient from pink to blue */
+}
+.logo {
+    position: relative;
+}
+
+.logo img {
+    width: 140px;
+}
+
+.login-container {
+    width: 350px;
+    padding: 40px 30px; /* Increased padding for more height */
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Cursive', cursive; /* Bolder and cursive letters */
+    color: #333;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #e94057; /* Pink color for buttons */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #d7314a; /* Slightly darker shade of pink for hover */
+}
+
+.signup-box {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f8f8f8; /* Light background for the signup box */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.signup-container {
+    margin-top: 10px;
+    color: #555;
+}
+
+.signup-container a {
+    color: #4a00e0; /* Blue color for sign-up link */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-container a:hover {
+    text-decoration: underline;
+}
+
+.signup-button {
+    width: 100%;
+    margin-top: 10px;
+    background-color: #4a00e0; /* Blue color for signup button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.signup-button:hover {
+    background-color: #3a00c0; /* Slightly darker shade of blue for hover */
+}

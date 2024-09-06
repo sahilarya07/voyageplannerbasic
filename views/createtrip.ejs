@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Trip - Voyage Planner</title>
+    <link rel="stylesheet" href="/css/createtrip.css">
+    <style>
+        body {
+            background: url('/images/back1.jpeg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .suggestions-container {
+            position: absolute;
+            background: #34495E;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            max-height: 200px;
+            overflow-y: auto;
+            width: calc(100% - 2px);
+            z-index: 1000;
+            margin-top: 5px;
+            color: #ECF0F1;
+        }
+
+        .suggestion-item {
+            padding: 8px;
+            cursor: pointer;
+        }
+
+        .suggestion-item:hover {
+            background-color: #2C3E50;
+        }
+
+        .no-results, .error {
+            padding: 8px;
+            color: #BDC3C7;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="/images/logo.png" alt="Voyage Planner Logo" class="logo">
+            <h1 class="title">Voyage Planner</h1>
+        </div>
+    </header>
+
+    <div class="trip-form-container">
+        <h2>Tell us your travel preferences</h2>
+        <p>Just provide some basic information, and our trip planner will generate a customized itinerary based on your preferences.</p>
+        
+        <form action="/generate-trip" method="post" class="trip-form">
+            <label for="destination">What is your destination of choice?</label>
+            <div style="position: relative;">
+                <input id="destination" name="destination" type="text" placeholder="Enter a destination" required>
+                <div id="suggestions" class="suggestions-container"></div>
+            </div>
+
+            <label for="days">How many days are you planning your trip?</label>
+            <input id="days" name="days" type="number" min="1" placeholder="Enter number of days" required>
+
+            <label>What is Your Budget?</label>
+            <div class="budget-options">
+                <input type="radio" id="low" name="budget" value="low" required>
+                <label for="low" class="tile">Low (0 - 1000 USD)</label>
+                <input type="radio" id="medium" name="budget" value="medium">
+                <label for="medium" class="tile">Medium (1000 - 2500 USD)</label>
+                <input type="radio" id="high" name="budget" value="high">
+                <label for="high" class="tile">High (2500+ USD)</label>
+            </div>
+
+            <label>Who do you plan on traveling with on your next adventure?</label>
+            <div class="companions-options">
+                <input type="radio" id="solo" name="companions" value="solo" required>
+                <label for="solo" class="tile">Solo</label>
+                <input type="radio" id="couple" name="companions" value="couple">
+                <label for="couple" class="tile">Couple</label>
+                <input type="radio" id="family" name="companions" value="family">
+                <label for="family" class="tile">Family</label>
+                <input type="radio" id="friends" name="companions" value="friends">
+                <label for="friends" class="tile">Friends</label>
+            </div>
+
+            <button type="submit">Generate Trip</button>
+        </form>
+    </div>
+
+    <script>
+        const apiKey = 'b470f3fd8a774b49936529adca8f71cc'; 
+        const input = document.getElementById('destination');
+        const suggestionsContainer = document.getElementById('suggestions');
+
+        input.addEventListener('input', function() {
+            const query = input.value;
+
+            if (query.length < 3) {
+                suggestionsContainer.innerHTML = ''; 
+                return;
+            }
+
+            fetch(`https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(query)}&key=${apiKey}`)
+                .then(response => response.json())
+                .then(data => {
+                    suggestionsContainer.innerHTML = '';
+
+                    if (data.results.length > 0) {
+                        data.results.forEach(result => {
+                            const suggestionItem = document.createElement('div');
+                            suggestionItem.className = 'suggestion-item';
+                            suggestionItem.textContent = result.formatted;
+
+                            suggestionItem.addEventListener('click', () => {
+                                input.value = result.formatted;
+                                suggestionsContainer.innerHTML = '';
+                            });
+
+                            suggestionsContainer.appendChild(suggestionItem);
+                        });
+                    } else {
+                        suggestionsContainer.innerHTML = '<div class="no-results">No results found</div>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    suggestionsContainer.innerHTML = '<div class="error">Error fetching data</div>';
+                });
+        });
+    </script>
+</body>
+</html>
